@@ -5,10 +5,49 @@ sources:
     tables:
       - name: sales
         identifier: raw_gz_sales
+        description: sales of Greenweez
+        columns:
+          - name: date_date
+            description: date of purchase
+          - name: orders_id
+            description: foreign key to ship
+          - name: pdt_id
+            description: foreign key to product
+          - name: revenue
+            description: satislardan elde edilen hasilat
+          - name: quantity
+            description: siprais adedi
+        tests:
+          - unique:
+              column_name: "(orders_id||'-'||pdt_id)"
 
       - name: product
         identifier: raw_gz_product
+        description: products of Greenweez
+        columns:
+          - name: products_id
+            description: foreign key to product
+            tests:
+              - unique
+              - not_null
+          - name: purchse_price
+            description: urunun tedarikciden satın alındıgı fiyat  
+            
 
       - name: ship
         identifier: raw_gz_ship  
+        description: shipping data for Greenweez orders
+        columns:
+          - name: orders_id
+            description: foreign key to ship
+            tests:
+              - unique
+              - not_null
+          - name: shipping_fee
+            description: the price the customer pays for shipping
+          - name: logcost
+            description: Ürünün taşınması, depolanması ve teslimi sırasında oluşan lojistik maliyetler
+          - name: ship_cost
+            description: Ürünlerin müşteriye teslimi için lojistik firmalarına ödenen nakliye maliyeti 
+            
   
